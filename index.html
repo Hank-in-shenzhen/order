@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正在进入点餐系统...</title>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            const now = new Date();
+            const hour = now.getHours();
+            const ua = window.navigator.userAgent.toLowerCase();
+
+            // 1. 判断是否是支付宝扫码
+            if (ua.indexOf('alipay') > -1) {
+                // 支付宝环境下：酒馆链接
+                if (hour >= 21 || hour < 4) {
+                    window.location.href = "https://www.wmslz.com/s/E3dX7Dr82eN";
+                } else {
+                    document.body.innerHTML = '<div style="text-align:center;margin-top:50px;font-size:20px;">当前时段请使用微信扫码进入餐厅</div>';
+                }
+            } 
+            // 2. 判断是否是微信扫码
+            else if (ua.indexOf('micromessenger') > -1) {
+                if (hour >= 21 || hour < 4) {
+                    // 跳转至：酒馆微信小程序
+                    window.location.href = "weixin://dl/business/?t=CEP1Mq9Jrlgba9r";
+                } else {
+                    // 跳转至：餐厅微信小程序
+                    window.location.href = "weixin://dl/business/?t=jVXITPXTkCjuPDf";
+                }
+            } 
+            else {
+                document.body.innerHTML = '<div style="text-align:center;margin-top:50px;font-size:20px;">请使用微信或支付宝扫码点餐</div>';
+            }
+        };
+    </script>
+</body>
+</html
